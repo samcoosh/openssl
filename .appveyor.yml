@@ -6,7 +6,7 @@ install:
   
 before_build:
 - cmd: cd openssl
-- cmd: perl.exe Configure VC-WIN32
+- cmd: perl.exe Configure VC-WIN32 no-asm
     
 build_script:
 - cmd: cd openssl
