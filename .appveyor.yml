@@ -14,7 +14,9 @@ build_script:
 - cmd: nmake
 - cmd: nmake install
 - cmd: popd
+- cmd: @echo "popd called"
 - cmd: endlocal
+- cmd: @echo "endlocal called"
   
 after_test:
   - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
