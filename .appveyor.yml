@@ -9,7 +9,6 @@ before_build:
 - cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm
     
 build_script:
-- cmd: cd openssl
 - cmd: nmake
   
 after_test:
