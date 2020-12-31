@@ -3,14 +3,18 @@ image:
   
 install:  
   - git submodule update --init --recursive
-  
-before_build:
+      
+build_script:
+- cmd: pushd openssl
+- cmd: setlocal
 - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 - cmd: cd openssl
-- cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm
-    
-build_script:
+- cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm --prefix=%APPVEYOR_BUILD_FOLDER%\repository --openssldir=%APPVEYOR_BUILD_FOLDER%\repository
+- cmd: del *.lib *.dll *.exp *.pdb
+- cmd: nmake clean
 - cmd: nmake
+- cmd: nmake install
+- cmd: popd
   
 after_test:
   - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
