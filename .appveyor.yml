@@ -6,19 +6,18 @@ install:
       
 build_script:
 - cmd: setlocal
-- cmd: pushd openssl
+- cmd: cd openssl
 - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
 - cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm --prefix=%APPVEYOR_BUILD_FOLDER%\repository
 - cmd: del *.lib *.dll *.exp *.pdb
 - cmd: nmake clean
 - cmd: nmake
 - cmd: nmake install
-- cmd: popd
-- cmd: echo "popd called"
 - cmd: endlocal
 - cmd: echo "endlocal called"
   
 after_test:
+  - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
   
 artifacts:
