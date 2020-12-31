@@ -1,0 +1,23 @@
+image:
+  - Visual Studio 2019
+  
+install:  
+  - git submodule update --init --recursive
+  
+before_build:
+- cmd: cd openssl
+- cmd: perl.exe Configure VC-WIN32
+    
+build_script:
+- cmd: cd openssl
+- cmd: nmake
+  
+after_test:
+  - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
+  
+artifacts:
+  - path: '**\*.nupkg'
+  
+deploy:
+- provider: Environment
+  name: production
