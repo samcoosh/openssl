@@ -14,8 +14,7 @@ build_script:
 - cmd: nmake
 - cmd: nmake install
 - cmd: endlocal
-- cmd: echo "endlocal called"
-  
+
 after_test:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: nuget pack -Version %APPVEYOR_BUILD_VERSION%
