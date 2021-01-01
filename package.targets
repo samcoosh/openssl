@@ -6,12 +6,12 @@
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Platform)' == 'Win32' And ('$(PlatformToolset)' == 'v142')">
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'Win32' And '$(PlatformToolset)' == 'v142'">
     <Link>
       <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)Win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Platform)' == 'x64' And ('$(PlatformToolset)' == 'v142')">
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'x64' And '$(PlatformToolset)' == 'v142'">
     <Link>
       <AdditionalLibraryDirectories>$(MSBuildThisFileDirectory)x64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -23,4 +23,13 @@
       <AdditionalDependencies>libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>  
+  <!-- dynamic libraries -->
+  <Target Name="openssl_AfterBuild_x86_vc142" Condition="'$(Platform)' == 'Win32' And ('$(PlatformToolset)' == 'v142')" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Win32\bin\libssl-1_1.dll"    DestinationFiles="$(TargetDir)libssl-1_1.dll"        SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)Win32\bin\libcrypto-1_1.dll" DestinationFiles="$(TargetDir)libcrypto-1_1.dll"     SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="openssl_AfterBuild_x64_vc142" Condition="'$(Platform)' == 'x64' And ('$(PlatformToolset)' == 'v142')" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)x64\bin\libssl-1_1.dll"    DestinationFiles="$(TargetDir)libssl-1_1.dll"        SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)x64\bin\libcrypto-1_1.dll" DestinationFiles="$(TargetDir)libcrypto-1_1.dll"     SkipUnchangedFiles="true" />
+  </Target>
 </Project>
