@@ -16,7 +16,8 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="package.targets"          target="build\native\openssl.targets" />  
-	<file src="repository\**\*.*" 	 target="build\native\" />
+	<file src="package.targets"          	target="build\native\openssl.targets" />  
+	<file src="repository\include\**\*.*" 	target="build\native\include" />
+	<file src="repository\lib\**\*.*" 	 	target="build\native\lib" />
   </files>
 </package>
