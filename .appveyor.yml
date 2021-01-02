@@ -8,7 +8,7 @@ build_script:
 - cmd: setlocal
 - cmd: cd openssl
 - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
-- cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm --prefix=%APPVEYOR_BUILD_FOLDER%\repository_x86 --debug
+- cmd: C:\Strawberry\perl\bin\perl.exe Configure debug-VC-WIN32 no-asm --prefix=%APPVEYOR_BUILD_FOLDER%\repository_x86 --debug
 - cmd: del *.lib *.dll *.exp *.pdb
 - cmd: nmake clean
 - cmd: nmake
