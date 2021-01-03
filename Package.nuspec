@@ -17,8 +17,10 @@
   </metadata>
   <files>
 	<file src="package.targets"          	target="build\native\openssl.targets" />  
-	<file src="repository_x86\include\**\*.*" 	target="build\native\include" />
-	<file src="repository_x86\lib\**\*.*" 	 	target="build\native\Win32\lib" />
-	<file src="repository_x86\bin\**\*.*" 	 	target="build\native\Win32\bin" />
+	<file src="package_x86\include\**\*.*" 	target="build\native\include" />
+	<file src="package_x86\lib\**\*.*" 	 	target="build\native\Win32\lib" />
+	<file src="package_x86\bin\**\*.*" 	 	target="build\native\Win32\bin" />
+	<file src="package_x64\lib\**\*.*" 	 	target="build\native\x64\lib" />
+	<file src="package_x64\bin\**\*.*" 	 	target="build\native\x64\bin" />
   </files>
 </package>

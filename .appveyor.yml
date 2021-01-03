@@ -5,15 +5,14 @@ install:
   - git submodule update --init --recursive --depth 1
       
 build_script:
-- cmd: setlocal
-- cmd: cd openssl
-- cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
-- cmd: C:\Strawberry\perl\bin\perl.exe Configure VC-WIN32 no-asm --prefix=%APPVEYOR_BUILD_FOLDER%\repository_x86
-#- cmd: del *.lib *.dll *.exp *.pdb
-#- cmd: nmake clean
-- cmd: nmake
-- cmd: nmake install
-- cmd: endlocal
+- cmd: cmake -H.\openssl-cmake -G "Visual Studio 16 2019" -A Win32 -B./build_x86 -DCMAKE_INSTALL_PREFIX=./package_x86 -DCMAKE_DEBUG_POSTFIX="d"
+- cmd: cmake -H.\openssl-cmake -G "Visual Studio 16 2019" -A x64 -B./build_x64 -DCMAKE_INSTALL_PREFIX=./package_x64  -DCMAKE_DEBUG_POSTFIX="d"
+
+build_script:
+- cmd: cmake --build build_x86 --target INSTALL --config Debug
+- cmd: cmake --build build_x64 --target INSTALL --config Debug
+- cmd: cmake --build build_x86 --target INSTALL --config Release
+- cmd: cmake --build build_x64 --target INSTALL --config Release
 
 after_test:
   - cmd: cd %APPVEYOR_BUILD_FOLDER%

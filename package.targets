@@ -18,12 +18,18 @@
   </ItemDefinitionGroup>
 
   <!-- static libraries -->
-  <ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'Win32' And '$(PlatformToolset)' == 'v142'">
     <Link>
-      <AdditionalDependencies>libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcrypto-1_1.lib;libssl-1_1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>  
-  <!-- dynamic libraries -->
+  <ItemDefinitionGroup Condition="'$(Platform)' == 'x64' And '$(PlatformToolset)' == 'v142'">
+    <Link>
+      <AdditionalDependencies>libcrypto-1_1-x64.lib;libssl-1_1-x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>  
+  
+  <!-- dynamic libraries
   <Target Name="openssl_AfterBuild_x86_vc142" Condition="'$(Platform)' == 'Win32' And ('$(PlatformToolset)' == 'v142')" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(MSBuildThisFileDirectory)Win32\bin\libssl-1_1.dll"    DestinationFiles="$(TargetDir)libssl-1_1.dll"        SkipUnchangedFiles="true" />
     <Copy SourceFiles="$(MSBuildThisFileDirectory)Win32\bin\libcrypto-1_1.dll" DestinationFiles="$(TargetDir)libcrypto-1_1.dll"     SkipUnchangedFiles="true" />
@@ -32,4 +38,5 @@
     <Copy SourceFiles="$(MSBuildThisFileDirectory)x64\bin\libssl-1_1.dll"    DestinationFiles="$(TargetDir)libssl-1_1.dll"        SkipUnchangedFiles="true" />
     <Copy SourceFiles="$(MSBuildThisFileDirectory)x64\bin\libcrypto-1_1.dll" DestinationFiles="$(TargetDir)libcrypto-1_1.dll"     SkipUnchangedFiles="true" />
   </Target>
+   -->
 </Project>
