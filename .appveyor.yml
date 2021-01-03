@@ -4,7 +4,7 @@ image:
 install:  
   - git submodule update --init --recursive --depth 1
       
-build_script:
+before_build:
 - cmd: cmake -H.\openssl-cmake -G "Visual Studio 16 2019" -A Win32 -B./build_x86 -DCMAKE_INSTALL_PREFIX=./package_x86 -DCMAKE_DEBUG_POSTFIX="d"
 - cmd: cmake -H.\openssl-cmake -G "Visual Studio 16 2019" -A x64 -B./build_x64 -DCMAKE_INSTALL_PREFIX=./package_x64  -DCMAKE_DEBUG_POSTFIX="d"
 
